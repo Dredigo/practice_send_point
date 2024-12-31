@@ -1,0 +1,60 @@
+#:import hex kivy.utils.get_color_from_hex
+
+<SigninWindow>:
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgba: hex ('#FF7C39')
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    BoxLayout:
+        size_hint_y: .05
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: hex ('#F2F2F2')
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        size_hint_y: .9
+        Label:
+            size_hint_x: .3
+        BoxLayout:
+            size_hint_x: .4
+            orientation: 'vertical'
+            Label:
+                size_hint_y: .15
+                text: "Bienvenido"
+                color: hex('#1D1D1D')
+            Label:
+                id: signin_notificacion
+                size_hint_y: .15
+                color: hex('#FF3333')
+            TextInput:
+                id: username
+                size_hint_y: .1
+                hint_text: 'Nombre de Usuario'
+                multiline: False
+                write_tab: False
+                on_text_validate: root.verificar_usuario(self.text, password.text)
+            TextInput:
+                id: password
+                size_hint_y: .1
+                hint_text: 'Contraseña'
+                multiline: False
+                write_tab: False
+                password: True
+                on_text_validate: root.verificar_usuario(username.text, self.text)
+            Button:
+                size_hint_y: .1
+                background_normal: ''
+                background_color: hex('#000000')
+                text: 'Ingresar'
+                on_release: root.verificar_usuario(username.text, password.text)
+            Label:
+                size_hint_y: .4
+        Label:
+            size_hint_x: .3
+    BoxLayout:
+        size_hint_y: .05
